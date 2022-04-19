@@ -1,5 +1,7 @@
 # React
 
+Project after reading the "Basic concepts" section of the React documentation
+
 ## Install package
 
 * npm init -y
