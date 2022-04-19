@@ -41,7 +41,7 @@ class FrozenWrapper extends React.Component {
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h1>Frozen App</h1>
+                        <h1>Products</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -59,7 +59,11 @@ class FrozenWrapper extends React.Component {
             <div class="container">
                 <div class="row">
                     <div class="col">
-                    <ContentTableWrapper products = {this.products} searchValue = {this.state.searchValue}/>
+                        <ContentTableWrapper
+                            products = {this.products}
+                            searchValue = {this.state.searchValue}
+                            showIsStock = {this.state.showIsStock}
+                        />
                     </div>
                 </div>
             </div>
@@ -67,9 +71,6 @@ class FrozenWrapper extends React.Component {
       </div>
       );
     }
-
-
-    
   }
   
   class FrozenSearchForm extends React.Component {
@@ -83,8 +84,7 @@ class FrozenWrapper extends React.Component {
         this.props.handleFilterTextChange(e.target.value);
     }
     onShowIsStock(e)  {
-        console.log(e.target.value);
-        this.props.handleShowIsStock(e.target.value);
+        this.props.handleShowIsStock(e.target.checked);
     }
 
     render(){
@@ -102,7 +102,11 @@ class FrozenWrapper extends React.Component {
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="checkbox" name="" id="showIsStock"  value = {this.props.showIsStock} onChange={this.handleInStockChange} />
+                        <input
+                        type="checkbox"
+                        name="" id="showIsStock"
+                        checked={this.props.showIsStock}
+                        onChange={this.onShowIsStock} />
                         <label for="showIsStock">Only show products in stock</label>
                     </div>
                 </div>
@@ -124,23 +128,39 @@ class FrozenWrapper extends React.Component {
         let category = null;
 
         this.products.forEach(product => {
+            
+            let searchValue = this.props.searchValue.toLowerCase();
             let productClass = '';
-            let searchValue = this.searchValue;
-
-            if(product.name.toLowerCase().includes(this.props.searchValue.toLowerCase())){
-                if(product.category != category){
-                    row.push(<CategoryRow kye = {product.category} categoryName = {product.category}/>);
-                    category = product.category;
+            let productName = product.name.toLowerCase();
+        
+            if(productName.includes(searchValue)){
+                if(this.props.showIsStock) {
+                    if(product.stocked){
+                        console.log('включен');
+                        if(product.category != category){
+                            row.push(<CategoryRow kye = {product.category} categoryName = {product.category}/>);
+                            category = product.category;
+                        }
+                        row.push(this.createProduct(product));
+                    } 
+                }else {
+                    if(product.category != category){
+                        row.push(<CategoryRow key = {product.category} categoryName = {product.category}/>);
+                        category = product.category;
+                    }
+                    row.push(this.createProduct(product));
                 }
-
-                if(product.stocked == false){
-                    productClass = 'no-stocked';
-                }
-
-                row.push(<ProductRow key = {product.name} product =  {[product.name, product.price, productClass]}/>);
             }
         });
         return row;
+    }
+
+    createProduct(product){
+        let productClass = '';
+        if(product.stocked == false){
+            productClass = 'no-stocked';
+        }
+        return (<ProductRow key = {product.name} product =  {[product.name, product.price, productClass]}/>);
     }
 
     render(){
