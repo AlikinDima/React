@@ -40,8 +40,8 @@ class FrozenWrapper extends React.Component {
         <header>
             <div class="container">
                 <div class="row">
-                    <div class="col">
-                        <h1>Products</h1>
+                    <div class="col d-flex justify-content-center">
+                        <h1 class='header-title'>PRODUCTS</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -89,31 +89,32 @@ class FrozenWrapper extends React.Component {
 
     render(){
         return (
-            <form>
+            <form class='product-form'>
                 <div class="row">
                     <div class="col">
                         <input
                         type="text"
+                        class='search-input'
                         placeholder="Search..."
                         value = {this.props.searchValue}
                         onChange={this.onFilterTextChange}    
                          />
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
+                <div class="row justify-content-end">
+                    <div class="col-6 d-flex align-items-center">
                         <input
                         type="checkbox"
+                        class='only-in-stock'
                         name="" id="showIsStock"
                         checked={this.props.showIsStock}
                         onChange={this.onShowIsStock} />
-                        <label for="showIsStock">Only show products in stock</label>
+                        <label class='checkbox-lable' for="showIsStock">products in stock</label>
                     </div>
                 </div>
             </form>
         );
     }
-
   }
 
   class ContentTableWrapper extends React.Component {
@@ -136,7 +137,6 @@ class FrozenWrapper extends React.Component {
             if(productName.includes(searchValue)){
                 if(this.props.showIsStock) {
                     if(product.stocked){
-                        console.log('включен');
                         if(product.category != category){
                             row.push(<CategoryRow kye = {product.category} categoryName = {product.category}/>);
                             category = product.category;
@@ -165,7 +165,7 @@ class FrozenWrapper extends React.Component {
 
     render(){
         return (
-            <table>
+            <table  class='product-table'>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -190,7 +190,7 @@ class FrozenWrapper extends React.Component {
     render(){
         return(
             <tr>
-                <th colspan="2">{this.props.categoryName}</th>
+                <td colspan="2" class='product-category'>{this.props.categoryName}</td>
             </tr>
         );
     }

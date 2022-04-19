@@ -1,3 +1,110 @@
+*{padding: 0;margin: 0;border: 0;}
+*,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner{padding:0;border:0;}
+a,a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
+
+*{
+    font-family: 'Montserrat';
+    padding: 0px;
+    margin: 0px;
+}
+
+.frozen-wrapper{
+    display: flex;
+    width: 500px;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 100px;
+    padding: 30px 75px 60px 75px;
+
+    border: 8px;
+    border-style: solid;
+    
+}
 .no-stocked{
     color: red;
+}
+
+.header-title{    
+    font-weight: 800;
+    font-size: 36px;
+    padding: 30px 0px;
+    margin: 0px;
+}
+
+.product-form{
+    margin-bottom: 25px;
+}
+
+.checkbox-lable{
+    padding-left: 10px;
+}
+.product-table{
+    min-width: 100%;
+    & th, td {
+        padding: 10px 0px;
+        padding-left: 15px;
+    }
+
+    & *{
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+    }
+
+    & thead{
+        color: #BFBFBF;
+        padding: 10px 0px;
+        background: black;
+        min-width: 100%;
+
+    }
+    
+    & .product-category{
+        background: white;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    & tbody tr{
+        background-color: #C1D5E0;
+    }
+
+    & tbody tr:nth-child(odd){
+        background-color: #D6EAF5;
+    }
+    
+}
+
+
+
+
+.search-input{
+    border-width: 0px 0px 2px 0px;
+    font-weight: 300;
+    font-size: 14px;
+    border-style: solid;
+    min-width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+
+    &:hover{
+    }
+}
+
+.only-in-stock{
+    border-radius: 0px;
+
 }
